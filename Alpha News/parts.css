@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Open Sans', sans-serif;
+    margin: auto;
+}
+h1{
+    font-family: 'Roboto Slab', serif;
+    font-size: 60px;
+    font-weight: 900;
+    color: #990000;
+    text-align: center;
+}
+hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 3px solid #000000;
+    padding: 0;
+    margin-bottom: 10px;
+}
+nav{
+    display: flex;
+    padding: 1% 5%;
+    justify-content: space-between;
+    align-items: center;
+}
+p{
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    padding: 10px 12px;
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 1%;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+p:hover{
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.6);
+}
+span{
+    font-weight: 900;
+    color: #990000;
+}
+.links{
+    flex: 1;
+    text-align: right;
+}
+.links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 10px 12px;
+    position: relative;
+}
+.links ul li a{
+    color: #000000;
+    text-decoration: none;
+    font-size: 18px;
+}
+.links ul li::after{
+    content:'';
+    width: 0%;
+    height: 2px;
+    background: #990000;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+.links ul li:hover::after{
+    width: 100%;
+}
+nav .fa{
+    display: none;
+}
+.link{
+    margin-top: 20px;
+    background-color: #000000;
+    color: #FFFFFF;
+    text-align: center;
+    width: 15%;
+    padding: 5px;
+}
