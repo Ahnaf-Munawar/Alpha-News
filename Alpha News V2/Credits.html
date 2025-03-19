@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Credits</title>
+    <link rel="stylesheet" type="text/css" href="css\credits.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/jpg" href="images/favicon.jpg">
+</head>
+<body>
+	<nav>
+        <div class="links" id="Links">
+            <i class="fa fa-times-circle" onclick="hiddenMenu()"></i>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Explore.html">Explore</a></li>
+                <li><a href="Credits.html">Credits</a></li>
+                <li><a href="Report.html">Report</a></li>
+            </ul>
+        </div>
+        <img src="images/Clock-L.png" id="clock" class="clock-icon" onmouseover="toggleClockCalendar()" onmouseout="toggleClockCalendar()">
+        <div class="clock-calendar" id="clock-calendar">
+        <div class="datetime">
+            <div class="time" id="time"></div>
+            <div class="date" id="date"></div>
+            <div class="weather" id="weather"></div>
+        </div>
+        </div>
+        <img src="images/moon.png" id="icon">
+    </nav>
+    <hr>
+    <br>
+    <div class="ag-format-container">
+        <div class="ag-courses_box">
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Directed by: <br>
+                Abdullah Ibn Salam, Sir
+              </div>
+            </a>
+          </div>
+      
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Web Designed & Programmed by: <br>
+                Ahnaf Munawar
+              </div>
+            </a>
+          </div>
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                Editing Panel: <br>
+                Ariba Siddiqui <br>
+                Farhana Islam <br>
+                Sneha Hazra Rush <br>
+                Swapnil Das Oikkyo
+              </div>
+            </a>
+          </div>
+          <div class="ag-courses_item">
+            <a href="#" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title">
+                <div class="text"> Script Written by: <br>
+                Abdullah Sunan <br>
+                Abiad Chowdhury Prottush <br>
+                Ahmed Shahriar <br>
+                Alif Ben Naser <br>
+                Arni Sikder Tohri <br>
+                Aysha Siddika <br>
+                Mesbah Uddin Mahin <br>
+                Prithish Saha Aronya <br>
+                Samira Sanam Zara <br>
+                Turab Ahmed
+              </div>
+              </div>
+            </a>
+          </div>    
+        </div>
+      </div>
+      <a href="https://www.jis.edu.bd/"><img src="images/jisc-logo.png" class="jisc-logo"></a>
+      <a href="https://www.jis.edu.bd/" class="jisc"> Produced for Jahanara Israil School & College </a>
+      <hr>
+      <p class="page-number">Credits</p>
+</body>
+</html>
+<script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function(){
+            var icon = document.getElementById("icon");
+            var clock = document.getElementById("clock");
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-theme");
+                icon.src = "images/sun.png";
+                clock.src = "images/Clock-D.png";
+            } else {
+                icon.src = "images/moon.png";
+                clock.src = "images/Clock-L.png";
+            }
+
+            icon.onclick = function() {
+                document.body.classList.toggle("dark-theme");
+                if (document.body.classList.contains("dark-theme")) {
+                    icon.src = "images/sun.png";
+                    clock.src = "images/Clock-D.png";
+                    localStorage.setItem("theme", "dark");
+                } else {
+                    icon.src = "images/moon.png";
+                    clock.src = "images/Clock-L.png";
+                    localStorage.setItem("theme", "light");
+                }
+            };
+        });
+</script>
+<script type="text/javascript">
+        const timeElement = document.getElementById("time");
+        const dateElement = document.getElementById("date");
+        const weatherElement = document.getElementById("weather");
+        const clockCalendar = document.getElementById("clock-calendar");
+        const API_KEY = '35ce1fae9d35319b05a23d2a09dc12af';
+        function formatTime(date) {
+            const hours12 = date.getHours() % 12 || 12;
+            const minutes = date.getMinutes();
+            const isAm = date.getHours() < 12;
+
+            return `${hours12.toString().padStart(2, "0")}:${minutes
+                .toString()
+                .padStart(2, "0")} ${isAm ? "AM" : "PM"}`;
+        }
+
+        function formatDate(date) {
+            const DAYS = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ];
+            const MONTHS = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ];
+
+            return `${DAYS[date.getDay()]}, ${
+                MONTHS[date.getMonth()]
+            } ${date.getDate()} ${date.getFullYear()}`;
+        }
+
+        function toggleClockCalendar() {
+            if (clockCalendar.style.display === "none" || clockCalendar.style.display === "") {
+                clockCalendar.style.display = "block";
+                updateClockCalendar();
+            } else {
+                clockCalendar.style.display = "none";
+            }
+        }
+
+        function updateClockCalendar() {
+            const now = new Date();
+
+            timeElement.textContent = formatTime(now);
+            dateElement.textContent = formatDate(now);
+
+            setInterval(() => {
+                const now = new Date();
+
+                timeElement.textContent = formatTime(now);
+                dateElement.textContent = formatDate(now);
+            }, 200);
+
+            fetchWeather();
+        }
+
+        async function fetchWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+                    try {
+                        const response = await fetch(url);
+                        if (response.ok) {
+                            const data = await response.json();
+                            const temperature = data.main.temp;
+                            const description = data.weather[0].description;
+                            weatherElement.textContent = `Weather: ${temperature.toFixed(1)}°C, ${description.charAt(0).toUpperCase() + description.slice(1)}`;
+                        } else {
+                            weatherElement.textContent = "Weather data not available";
+                        }
+                    } catch (error) {
+                        weatherElement.textContent = "Error fetching weather data";
+                    }
+                }, () => {
+                    weatherElement.textContent = "Geolocation not supported or permission denied";
+                });
+            } else {
+                weatherElement.textContent = "Geolocation not supported by this browser";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            updateClockCalendar();
+        });
+    </script>
+<script>
+window.embeddedChatbotConfig = {
+chatbotId: "Mcd9pIqNj0gHWnaJgyLQE",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="Mcd9pIqNj0gHWnaJgyLQE"
+domain="www.chatbase.co"
+defer>
+</script>

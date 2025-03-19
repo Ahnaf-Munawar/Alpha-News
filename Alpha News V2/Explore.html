@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="icon" type="image/jpg" href="images/favicon.jpg">
+  <link rel="stylesheet" href="css\explore.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+     
+</head>
+<body>
+    <nav>
+        <img src="images/Clock-L.png" id="clock" class="clock-icon" onmouseover="toggleClockCalendar()" onmouseout="toggleClockCalendar()">
+        <div class="clock-calendar" id="clock-calendar">
+        <div class="datetime">
+            <div class="time" id="time"></div>
+            <div class="date" id="date"></div>
+            <div class="weather" id="weather"></div>
+        </div>
+        </div>
+        <div class="links" id="Links">
+        </div>
+        <img src="images/moon.png" id="icon">
+    </nav>
+    <div class="container">
+        <div class="slide">
+            <div id="" class="item" style="background-image: url(images/Report.png);">
+                <div class="content">
+                    <div class="name-2">Report</div>
+                    <button onclick="document.location='Report.html'">Report</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(images/Home.png);">
+                <div class="content">
+                    <div class="name-2">Home</div>
+                    <button onclick="document.location='Home.html'">Home</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(images/What.png);">
+                <div class="content">
+                    <div class="name">What is Misinformation?</div>
+                    <button onclick="document.location='Part-1.html'">See More</button>
+                </div>
+            </div>
+            <div class="item" id="pic" style="background-image: url(images/Harmful.png);">
+                <div class="content">
+                    <div class="name">Harmful Effects of Misinformation</div>
+                    <button onclick="document.location='Part-2.html'">See More</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(images/Prevention.png);">
+                <div class="content">
+                    <div class="name">Prevention of Misinformation</div>
+                    <button onclick="document.location='Part-3.html'">See More</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(images/Credits.png);">
+                <div class="content">
+                    <div class="name-2">Credits</div>
+                    <button onclick="document.location='Credits.html'">Credits</button>
+                </div>
+            </div>
+        </div>
+        <div class="button">
+            <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+    </div>
+</body>
+<script type="text/javascript">
+  let next = document.querySelector('.next')
+  let prev = document.querySelector('.prev')
+
+  next.addEventListener('click', function(){
+      let items = document.querySelectorAll('.item')
+      document.querySelector('.slide').appendChild(items[0])
+  })
+
+  prev.addEventListener('click', function(){
+      let items = document.querySelectorAll('.item')
+      document.querySelector('.slide').prepend(items[items.length - 1]) 
+  })
+</script>
+<script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            var icon = document.getElementById("icon");
+            var clock = document.getElementById("clock");
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-theme");
+                icon.src = "images/sun.png";
+                clock.src = "images/Clock-D.png";
+            } else {
+                icon.src = "images/moon.png";
+                clock.src = "images/Clock-L.png";
+            }
+
+            icon.onclick = function() {
+                document.body.classList.toggle("dark-theme");
+                if (document.body.classList.contains("dark-theme")) {
+                    icon.src = "images/sun.png";
+                    clock.src = "images/Clock-D.png";
+                    localStorage.setItem("theme", "dark");
+                } else {
+                    icon.src = "images/moon.png";
+                    localStorage.setItem("theme", "light");
+                    clock.src = "images/Clock-L.png";
+                }
+            };
+        });
+</script>
+<script type="text/javascript">
+        const timeElement = document.getElementById("time");
+        const dateElement = document.getElementById("date");
+        const weatherElement = document.getElementById("weather");
+        const clockCalendar = document.getElementById("clock-calendar");
+        const API_KEY = '35ce1fae9d35319b05a23d2a09dc12af';
+        function formatTime(date) {
+            const hours12 = date.getHours() % 12 || 12;
+            const minutes = date.getMinutes();
+            const isAm = date.getHours() < 12;
+
+            return `${hours12.toString().padStart(2, "0")}:${minutes
+                .toString()
+                .padStart(2, "0")} ${isAm ? "AM" : "PM"}`;
+        }
+
+        function formatDate(date) {
+            const DAYS = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ];
+            const MONTHS = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ];
+
+            return `${DAYS[date.getDay()]}, ${
+                MONTHS[date.getMonth()]
+            } ${date.getDate()} ${date.getFullYear()}`;
+        }
+
+        function toggleClockCalendar() {
+            if (clockCalendar.style.display === "none" || clockCalendar.style.display === "") {
+                clockCalendar.style.display = "block";
+                updateClockCalendar();
+            } else {
+                clockCalendar.style.display = "none";
+            }
+        }
+
+        function updateClockCalendar() {
+            const now = new Date();
+
+            timeElement.textContent = formatTime(now);
+            dateElement.textContent = formatDate(now);
+
+            setInterval(() => {
+                const now = new Date();
+
+                timeElement.textContent = formatTime(now);
+                dateElement.textContent = formatDate(now);
+            }, 200);
+
+            fetchWeather();
+        }
+
+        async function fetchWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+                    try {
+                        const response = await fetch(url);
+                        if (response.ok) {
+                            const data = await response.json();
+                            const temperature = data.main.temp;
+                            const description = data.weather[0].description;
+                            weatherElement.textContent = `Weather: ${temperature.toFixed(1)}°C, ${description.charAt(0).toUpperCase() + description.slice(1)}`;
+                        } else {
+                            weatherElement.textContent = "Weather data not available";
+                        }
+                    } catch (error) {
+                        weatherElement.textContent = "Error fetching weather data";
+                    }
+                }, () => {
+                    weatherElement.textContent = "Geolocation not supported or permission denied";
+                });
+            } else {
+                weatherElement.textContent = "Geolocation not supported by this browser";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            updateClockCalendar();
+        });
+    </script>
+<script>
+window.embeddedChatbotConfig = {
+chatbotId: "Mcd9pIqNj0gHWnaJgyLQE",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="Mcd9pIqNj0gHWnaJgyLQE"
+domain="www.chatbase.co"
+defer>
+</script>
+</html>

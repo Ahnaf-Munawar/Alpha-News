@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Alpha News</title>
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/jpg" href="images/favicon.jpg">
+</head>
+<body>
+    <nav>
+        <div class="links" id="Links">
+            <i class="fa fa-times-circle" onclick="hiddenMenu()"></i>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Explore.html">Explore</a></li>
+                <li><a href="Credits.html">Credits</a></li>
+                <li><a href="Report.html">Report</a></li>
+            </ul>
+        </div>
+        <img src="images/Clock-L.png" id="clock" class="clock-icon" onmouseover="toggleClockCalendar()" onmouseout="toggleClockCalendar()">
+        <div class="clock-calendar" id="clock-calendar">
+        <div class="datetime">
+            <div class="time" id="time"></div>
+            <div class="date" id="date"></div><br>
+            <div class="weather" id="weather"></div>
+        </div>
+        </div>
+        <img src="images/moon.png" id="icon">
+    </nav>
+    <header>
+        <p class="link">alpha-news.netlify.app</p>
+        <hr class="hr1">
+        <section class="hidden">
+        <h1><span>Alpha</span>News</h1>
+        </section>
+        <section class="hidden">
+        <p class="madeby"> A Digital Technology Project by Grade-VIII (Alphas)</p>
+        </section>
+        <section class="hidden">
+        <h2 class="date" id="currentDate"></h2>
+        </section>
+        <hr class="hr2">
+    </header>
+    <section class="hidden">
+    <h1 class="title">"Harmful Effects of Misinformation"</h1>
+    </section>
+    <section class="hidden">
+    <section class="sec-1">
+        <hr class="break">
+        <div class="p-1">
+            <h4>What is Misinformation?</h4>
+            <p>Misinformation refers to false or inaccurate information that is spread either intentionally or unintentionally. It can propagate through various mediums such as social media, news outlet, or interpersonal communication and may result from a variety of factors including cognitive biases, delibwrate deception, or inadequate vetting of sources.</p>
+            <button class="button-1" onclick="document.location='Part-1.html'">Learn More</button>
+        </div>
+        <div class="p-1">
+            <h4>Harmful Effects of Misinformation</h4>
+            <p>Between truth and deception, misinformation has the ability to produce complex notions or overlap with other profound consequences. Some of these includes, skepticism, uncertainty, division, polarization & manipulation of emotions.</p>
+            <button class="button-2" onclick="document.location='Part-2.html'">Learn More</button>
+        </div>
+        <div class="sec-2">
+            <div class="img-1">
+                <img src="images\img.png">
+            <div class="cap">
+                <p class="caption">Source: AAMC</p>
+            </div>
+            <div class="p-2">
+                <h4>Prevention of Misinformation</h4>
+                <p>The importance of not immediately believing everything we see or hear on social media is vast. The story tells us to take a moment to read, beyond headline of valuable information. Check if the article or post provides credible evidence, sources, or context to support its claims. If it seems too sensational or lack substantial evidence, then it's best to be skeptical.</p>
+                <button class="button-3" onclick="document.location='Part-3.html'">Learn More</button>
+            </div>
+        </div>
+    </section>
+    <hr class="hr3">
+    <p class="page-number">Home</p>
+</body>
+</html>
+<script type="text/javascript">
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            console.log(entry)
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+            else {
+                entry.target.classList.remove("show");
+            }
+        });
+    });
+    const hiddenElements = document.querySelectorAll(".hidden");
+    hiddenElements.forEach((el) => observer.observe(el));
+</script>
+<script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            var icon = document.getElementById("icon");
+            var clock = document.getElementById("clock");
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-theme");
+                icon.src = "images/sun.png";
+                clock.src = "images/Clock-D.png";
+            } else {
+                icon.src = "images/moon.png";
+                clock.src = "images/Clock-L.png";
+            }
+
+            icon.onclick = function() {
+                document.body.classList.toggle("dark-theme");
+                if (document.body.classList.contains("dark-theme")) {
+                    icon.src = "images/sun.png";
+                    clock.src = "images/Clock-D.png";
+                    localStorage.setItem("theme", "dark");
+                } else {
+                    icon.src = "images/moon.png";
+                    localStorage.setItem("theme", "light");
+                    clock.src = "images/Clock-L.png";
+                }
+            };
+        });
+</script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+    var dateElement = document.getElementById('currentDate');
+    
+    var today = new Date();
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    var formattedDate = today.toLocaleDateString('en-US', options);
+
+    dateElement.textContent = formattedDate;
+});
+</script>
+<script type="text/javascript">
+        const timeElement = document.getElementById("time");
+        const dateElement = document.getElementById("date");
+        const weatherElement = document.getElementById("weather");
+        const clockCalendar = document.getElementById("clock-calendar");
+        const API_KEY = '35ce1fae9d35319b05a23d2a09dc12af'; 
+        function formatTime(date) {
+            const hours12 = date.getHours() % 12 || 12;
+            const minutes = date.getMinutes();
+            const isAm = date.getHours() < 12;
+
+            return `${hours12.toString().padStart(2, "0")}:${minutes
+                .toString()
+                .padStart(2, "0")} ${isAm ? "AM" : "PM"}`;
+        }
+
+        function formatDate(date) {
+            const DAYS = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ];
+            const MONTHS = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ];
+
+            return `${DAYS[date.getDay()]}, ${
+                MONTHS[date.getMonth()]
+            } ${date.getDate()} ${date.getFullYear()}`;
+        }
+
+        function toggleClockCalendar() {
+            if (clockCalendar.style.display === "none" || clockCalendar.style.display === "") {
+                clockCalendar.style.display = "block";
+                updateClockCalendar();
+            } else {
+                clockCalendar.style.display = "none";
+            }
+        }
+
+        function updateClockCalendar() {
+            const now = new Date();
+
+            timeElement.textContent = formatTime(now);
+            dateElement.textContent = formatDate(now);
+
+            setInterval(() => {
+                const now = new Date();
+
+                timeElement.textContent = formatTime(now);
+                dateElement.textContent = formatDate(now);
+            }, 200);
+
+            fetchWeather();
+        }
+
+        async function fetchWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+                    try {
+                        const response = await fetch(url);
+                        if (response.ok) {
+                            const data = await response.json();
+                            const temperature = data.main.temp;
+                            const description = data.weather[0].description;
+                            weatherElement.textContent = `Weather: ${temperature.toFixed(1)}°C, ${description.charAt(0).toUpperCase() + description.slice(1)}`;
+                        } else {
+                            weatherElement.textContent = "Weather data not available";
+                        }
+                    } catch (error) {
+                        weatherElement.textContent = "Error fetching weather data";
+                    }
+                }, () => {
+                    weatherElement.textContent = "Geolocation not supported or permission denied";
+                });
+            } else {
+                weatherElement.textContent = "Geolocation not supported by this browser";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            updateClockCalendar();
+        });
+    </script>
+<script>
+window.embeddedChatbotConfig = {
+chatbotId: "Mcd9pIqNj0gHWnaJgyLQE",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="Mcd9pIqNj0gHWnaJgyLQE"
+domain="www.chatbase.co"
+defer>
+</script>
